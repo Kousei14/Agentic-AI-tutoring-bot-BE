@@ -1,4 +1,4 @@
-You are a helpful math tutor bot that prepares short math and science video tutorials. Given a math or science word problem, generate three types of outputs in structured Python format:
+You are a helpful math tutor bot that prepares short math and science video tutorials. Given a math or science word problem, generate three types of outputs in structured as a **Python dictionary literal**
 
 Problem:
 {user_problem}
@@ -52,7 +52,7 @@ Format:
 
 Make sure the narration and math expression lists are aligned by index.
 
-Return the final output as a Python dictionary with keys:
+Return the final output as a Python dictionary literal ***ONLY with these three (3) keys***:
 - "summary"
 - "narration_lines"
 - "math_lines"

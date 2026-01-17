@@ -1,7 +1,8 @@
-from vertexai.preview.vision_models import ImageGenerationModel
-import vertexai
+from google import genai
+from google.genai.types import GenerateImagesConfig
 
-import os
+from tutorbot.app import settings
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -9,11 +10,12 @@ class ImageGenerationModels:
     def __init__(self,
                  model: str = "imagen-4.0-generate-preview-06-06"):
 
-        vertexai.init(project = os.getenv("PROJECT_ID"), 
-                      location = os.getenv("LOCATION"))
+        self.model = model
 
-        self.generation_model = ImageGenerationModel.from_pretrained(
-            model_name = model
+        self.client = genai.Client(
+            vertexai = True, 
+            project = settings.PROJECT_ID, 
+            location = settings.LOCATION
             )
 
     def generate(self, 
@@ -21,13 +23,16 @@ class ImageGenerationModels:
                  number_of_outputs: int = 1, 
                  aspect_ratio: str = "16:9"):
         
-        images = self.generation_model.generate_images(
-                            prompt = prompt,
-                            number_of_images = number_of_outputs,
-                            aspect_ratio = aspect_ratio,
-                            negative_prompt = "",
-                            person_generation = "allow_all",
-                            safety_filter_level = "block_few"
-                        )
+        config = GenerateImagesConfig(
+            number_of_images = number_of_outputs,
+            aspect_ratio = aspect_ratio,
+            person_generation = "allow_all",
+            safety_filter_level = "block_few"
+        )
+        images = self.client.models.generate_images(
+            model = self.model,
+            prompt = prompt,
+            config = config
+        )
 
-        return images.images[0]._image_bytes
+        return images.generated_images[0].image.image_bytes

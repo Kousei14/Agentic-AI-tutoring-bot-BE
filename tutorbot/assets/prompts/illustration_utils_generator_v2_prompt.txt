@@ -1,19 +1,30 @@
-You are to generate a Python dictionary describing how to illustrate the given math or science problem.
+You are to generate a **Python dictionary literal** describing how to illustrate the given math or science problem.
 
-The dictionary must have **three keys**:
+**Important rule:** The output must be a valid Python dictionary literal **only**.
+
+* Do **not** assign it to a variable (no `illustration = {{...}}`)
+* Do **not** add extra explanations or text outside the dictionary
+
+The dictionary must have **exactly three keys**:
 
 1. "illustration_prompt" – a detailed image generation prompt for a **Manim-style** illustration of the provided problem.
-2. "illustration_narration" – a short but **descriptive narration** (1–3 sentences) that clearly paints the scene of the illustration, describing the scene in detail, as if explaining the picture to a student. **DO NOT INCLUDE THE ANSWER TO THE PROBLEM**
-3. "animation_prompt" – a detailed description of how to animate the illustration so that the animation is **strictly synchronized with the narration**. The animation must act out the narration step by step: when the narration introduces an object, the animation should draw or reveal that object; when the narration highlights a relationship, the animation should visually emphasize it. **Do not animate the labels or text**, and do not provide or hint at the solution to the problem. The animation should only bring the narrated scene to life. The video generated must not include audio of a person narrating. Instead, it should only include sound effects synchronized with the visual actions (e.g., a soft 'swish' for drawing lines, a 'ding' for labels appearing, or subtle movement sounds when objects are emphasized).
+2. "illustration_narration" – a short but **descriptive narration** (1–3 sentences) that clearly paints the scene of the illustration, describing the scene in detail, as if explaining the picture to a student. **Do not include the solution.**
+3. "animation_prompt" – a detailed description of how to animate the illustration so that the animation is **strictly synchronized with the narration**. The animation must act out the narration step by step. **Do not animate the labels or text. Do not provide or hint at the solution.** The animation should only bring the narrated scene to life, with sound effects but no spoken audio.
+
+Additional formatting rules:
+
+* The image should have a **black background**.
+* **Do not include any title text or extraneous words** at the top.
+* All text should only be for labeling within the diagram, using a clean, sans-serif font.
+* The output must be a **Python dict literal** that can be parsed directly (e.g., with `ast.literal_eval`).
+
+**Example format (for reference only, not to be output literally):**
+`{{
+    "illustration_prompt": "Create a Manim-style illustration on a black background. ...",
+    "illustration_narration": "Here, we see ...",
+    "animation_prompt": "Begin the animation by drawing ... with sound effects ..."
+}}`
+
+Now generate the dictionary for the following problem:
 
 {user_problem}
-
-The image should be on a **black background** and **must not include any title text or extraneous words at the top**. All labels should be placed directly on the diagram. MAKE SURE that there are no wrong spellings and distorted letters.
-
-The prompt should define the following elements based on the problem:
-
-* **Style:** Manim-style, using clean, professional vector graphics and a minimalist aesthetic.
-* **Objects:** Describe the geometric shape or physical setup of the problem.
-* **Labels:** Specify the exact labels and their corresponding values for all relevant variables and constants (e.g., `H = [height]`, `R = [radius]`, `h`, `x`, `y`).
-* **State:** Clearly describe the state of the system at a specific moment in time (e.g., water at a certain depth, a ladder at a certain angle).
-* **Text:** All text on the image should be for labeling purposes only, using a clean, sans-serif font.

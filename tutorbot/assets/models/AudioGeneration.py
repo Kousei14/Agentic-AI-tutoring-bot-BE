@@ -4,8 +4,11 @@ from google.genai.types import (GenerateContentConfig,
                                 VoiceConfig, 
                                 PrebuiltVoiceConfig)
 
-from typing import Literal
+from tutorbot.app import settings
+
 from gtts import gTTS
+
+from typing import Literal
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -17,7 +20,9 @@ class AudioGenerationModels:
         self.mode = mode
         self.model = model
 
-        self.client = genai.Client()
+        self.client = genai.Client(
+            api_key = settings.GOOGLE_API_KEY
+        )
 
     def generate(self,
                  script: str):

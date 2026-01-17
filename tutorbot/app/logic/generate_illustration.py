@@ -1,8 +1,10 @@
 from tutorbot.assets.models.ImageGeneration import ImageGenerationModels
 
 class IllustrationGeneratorAgent:
-    def __init__(self):
-        pass
+    def __init__(self,
+                 model: str = "imagen-4.0-generate-preview-06-06"):
+        
+        self.model = model
 
     def generate(self,
                  prompt: str, 
@@ -10,7 +12,7 @@ class IllustrationGeneratorAgent:
                  aspect_ratio: str = "16:9"):
         
         images = ImageGenerationModels(
-            model = "imagen-4.0-generate-preview-06-06"
+            model = self.model
         ).generate(
             prompt = prompt,
             number_of_outputs = number_of_outputs,

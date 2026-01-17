@@ -1,8 +1,10 @@
 from tutorbot.assets.models.VideoGeneration import VideoGenerationModels
 
 class AnimationGeneratorAgent:
-    def __init__(self):
-        pass
+    def __init__(self,
+                 model: str = "veo-3.0-generate-001"):
+        
+        self.model = model
 
     def generate(self,
                  prompt: str, 
@@ -10,7 +12,7 @@ class AnimationGeneratorAgent:
                  aspect_ratio: str = "16:9"):
         
         videos = VideoGenerationModels(
-            model = "veo-3.0-generate-001"
+            model = self.model
         ).generate(
             prompt = prompt,
             image_path = "tutorbot/assets/images/illustration.jpg",

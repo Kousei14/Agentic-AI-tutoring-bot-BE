@@ -2,8 +2,8 @@ import cv2
 from typing import Any
 from manim import ImageMobject
 
-def bytes_to_video(bytes, 
-                   filename: str = "animation.mp4"):
+def save_bytes_as_video(bytes, 
+                        filename: str = "animation.mp4"):
 
     with open(file = "tutorbot/assets/{filename}".format(filename = f"videos/{filename}"), 
               mode = 'wb') as video_file:

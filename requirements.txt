@@ -10,6 +10,7 @@ google-genai
 google-cloud-aiplatform
 
 # Video, Audio Processing
+mutagen
 moviepy
 manim
 gtts

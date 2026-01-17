@@ -60,11 +60,12 @@ def get_physics_problem(index: int = None) -> str:
         "How much heat is required to raise the temperature of 200 g of water from 25°C to 75°C? (Specific heat of water = 4.18 J/g°C)",
         """A playground roundabout has a moment of inertia of 500 kg m2 about its axis of rotation. A constant torque of 200 N m is applied tangentially to the rim of the roundabout.
             (a) The angular acceleration of the roundabout is 0.35 rad s –2. Show that the frictional torque acting on the roundabout is 25 N m.
-            (b) A child of mass 50 kg sits on the roundabout at a distance of 1.25 m from the axis of rotation and the 200 N m torque is reapplied. Calculate the new angular acceleration of the roundabout.
+            (b) A man of mass 50 kg sits on the roundabout at a distance of 1.25 m from the axis of rotation and the 200 N m torque is reapplied. Calculate the new angular acceleration of the roundabout.
             (c) The 200 N m torque in part (b) is applied for 3 s then removed.
-            (i) Calculate the maximum angular velocity of the roundabout and child.
+            (i) Calculate the maximum angular velocity of the roundabout and man.
             (ii) The 200 N m torque is now removed. Find the time taken by the roundabout and
-            child to come to rest."""
+            man to come to rest.""",
+        "A roof truss is composed of multiple triangular units forming a Pratt truss configuration. The truss spans 12 meters and is supported at both ends (pin and roller). It has vertical and diagonal members, with joints spaced every 2 meters. A uniform load of 5 kN/m is applied along the top chord due to roofing material. Determine the internal forces (tension or compression) in all members of the truss using the method of joints and method of sections."
     ]
     
     return physics_problems[index] if index is not None else physics_problems[0]

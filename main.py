@@ -4,48 +4,29 @@ from tutorbot.assets.problems.problems import (get_calculus_problem,
                                                get_chemistry_problem, 
                                                get_finance_problems)
 
-import os
-import time
-
 def run_test(prompt: str):
 
-    from tutorbot.app.logic.generate_answer import QueryProcessorAgent, AnswerGeneratorAgent, IllustrationUtilsGeneratorAgent
+    from tutorbot.app.logic.generate_illustration import IllustrationGeneratorAgent
+    from tutorbot.app import settings
 
-    start_time = time.time()
+    illustration_generator = IllustrationGeneratorAgent(
+            model = settings.ILLUSTRATION_GENERATOR_MODEL
+        )
 
-    query_processor = QueryProcessorAgent()
-    processed_query = query_processor.generate(
-        prompt = prompt
+    generated_illustration = illustration_generator.generate(
+        prompt = prompt, 
+        number_of_outputs = 1,
+        aspect_ratio = "16:9"
     )
 
-    print(processed_query)
-    print(type(processed_query))
-
-    answer_generator = AnswerGeneratorAgent()
-    answer = answer_generator.generate(
-        prompt = processed_query
-    )
-
-    print(answer)
-    print(type(answer))
-
-    illustration_utils_generator = IllustrationUtilsGeneratorAgent()
-    illustration_utils = illustration_utils_generator.generate(
-        prompt = processed_query
-    )
-
-    print(illustration_utils)
-    print(type(illustration_utils))
-
-    end_time = time.time()
-
-    print(f"Processing time: {end_time - start_time}")
+    print(generated_illustration)
 
 def run(quality: str = "-pql",
         version: str = "v1.0",
         problem_prompt: str = ""):
 
     from manim.__main__ import main
+    import os
 
     if version == "v2.0":
         scene_file = "generated_scene_v2"
@@ -69,5 +50,5 @@ if __name__ == "__main__":
     chem_prompt = get_chemistry_problem(index = 1)
     finance_prompt = get_finance_problems(index = 0)
 
-    # run(quality = "-pql", version = "v2.0", problem_prompt = chem_prompt)
-    run_test(prompt = chem_prompt)
+    run(quality = "-pqh", version = "v2.0", problem_prompt = calc_prompt)
+    # run_test(prompt = "a corgi in a space suit.")
